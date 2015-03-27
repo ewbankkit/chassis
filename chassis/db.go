@@ -34,7 +34,7 @@ func WithTransaction(db *sql.DB, f InTransaction) error {
 	}
 	defer func() {
 		if err := recover(); err != nil {
-			log.Printf("%v\n", err)
+			log.Errorf("%v", err)
 			err = tx.Rollback()
 		} else {
 			err = tx.Commit()
@@ -44,7 +44,7 @@ func WithTransaction(db *sql.DB, f InTransaction) error {
 		}
 	}()
 	if err := f(tx); err != nil {
-		return err
+		panic(err)
 	}
 	return nil
 }
