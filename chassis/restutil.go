@@ -36,8 +36,8 @@ func ReadJson(r *http.Request, v interface{}) error {
 }
 
 func WriteJson(w http.ResponseWriter, code int, v interface{}) {
-	w.WriteHeader(code)
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(code)
 	if err := json.NewEncoder(w).Encode(v); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
