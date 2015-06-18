@@ -50,6 +50,18 @@ func NewAmount(s string) (*Amount, error) {
 	return &Amount{amount}, nil
 }
 
+func (a Amount) IsNegative() bool {
+	return a.amount < 0
+}
+
+func (a Amount) IsPositive() bool {
+	return a.amount > 0
+}
+
+func (a Amount) IsZero() bool {
+	return a.amount == 0
+}
+
 func (a Amount) Add(n Amount) *Amount {
 	return &Amount{a.amount + n.amount}
 }

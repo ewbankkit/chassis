@@ -134,6 +134,54 @@ func TestAdd2(t *testing.T) {
 	}
 }
 
+func TestPositiveNegativeZero1(t *testing.T) {
+	m, err := NewAmount("12.34")
+	if err != nil {
+		t.Error(err)
+	}
+	if !m.IsPositive() {
+		t.Fail()
+	}
+	if m.IsNegative() {
+		t.Fail()
+	}
+	if m.IsZero() {
+		t.Fail()
+	}
+}
+
+func TestPositiveNegativeZero2(t *testing.T) {
+	m, err := NewAmount("-12.34")
+	if err != nil {
+		t.Error(err)
+	}
+	if m.IsPositive() {
+		t.Fail()
+	}
+	if !m.IsNegative() {
+		t.Fail()
+	}
+	if m.IsZero() {
+		t.Fail()
+	}
+}
+
+func TestPositiveNegativeZero3(t *testing.T) {
+	m, err := NewAmount("0")
+	if err != nil {
+		t.Error(err)
+	}
+	if m.IsPositive() {
+		t.Fail()
+	}
+	if m.IsNegative() {
+		t.Fail()
+	}
+	if !m.IsZero() {
+		t.Fail()
+	}
+}
+
 func TestSqlNullable1(t *testing.T) {
 	m, err := NewAmount("12.34")
 	if err != nil {
